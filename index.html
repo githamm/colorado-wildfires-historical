@@ -329,6 +329,8 @@
         var items = data.features;
         var items2018 = [];
         var items2017 = [];
+        var acres2018 = [];
+
         for (var i = 0; i < items.length; ++i) {
             //console.log(items[i].properties.fireYear)
             //console.log(name + "=" + items[i].properties.fireYear);
@@ -336,11 +338,21 @@
                 items2018.push(items[i].properties)
             } else if  (items[i].properties.fireYear == 2017) {
                 items2017.push(items[i].properties)
+            };
+
+            if (items[i].properties.fireYear == 2018) {
+                acres2018.push(items[i].properties.fireAcres)
             }
         }
-        console.log(items2017);
+        //console.log(acres2018);
 
+        var res = acres2018.map(function(v) {
+          return parseInt(v, 10);
+        });
 
+        var sum = res.reduce(function(a, b) { return a + b; }, 0);
+        
+        console.log(sum);
 
         /***** ALL WILDFIRES *****/
         L.geoJson(data, {
